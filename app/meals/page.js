@@ -4,6 +4,11 @@ import { Suspense } from "react";
 import MealsGrid from "../components/meals/meals-grid";
 import classes from "./page.module.css";
 
+export const metadata = {
+  title: "All meals",
+  description: "Browse all meals shared by our community of food lovers.",
+};
+
 function Meals() {
   const meals = getAllMeals();
   return <MealsGrid meals={meals}></MealsGrid>;

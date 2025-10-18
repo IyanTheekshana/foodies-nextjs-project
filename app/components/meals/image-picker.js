@@ -1,8 +1,8 @@
 "use client";
-import { useRef, useState } from "react";
-
 import Image from "next/image";
+import { useRef, useState } from "react";
 import classes from "./image-picker.module.css";
+
 export default function ImagePicker({ label, name }) {
   const [pickedImage, setPickedImage] = useState();
   const imageInputRef = useRef();
@@ -17,6 +17,8 @@ export default function ImagePicker({ label, name }) {
       setPickedImage(null);
       return;
     }
+
+    // For preview
     const fileReader = new FileReader();
     fileReader.onload = function () {
       setPickedImage(fileReader.result);
@@ -32,15 +34,18 @@ export default function ImagePicker({ label, name }) {
           {!pickedImage && <p>No image picked yet.</p>}
           {pickedImage && <Image src={pickedImage} alt="Picked" fill />}
         </div>
+
+        {/* 👇 IMPORTANT: name={name} so FormData picks it up */}
         <input
           className={classes.input}
           type="file"
-          id="image"
+          id={name}
           accept="image/png, image/jpeg"
           name={name}
           ref={imageInputRef}
           onChange={handleImageChange}
         />
+
         <button
           type="button"
           className={classes.button}

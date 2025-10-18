@@ -2,6 +2,20 @@ import { getMealBySlug } from "@/lib/meals";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import classes from "./page.module.css";
+
+export async function generateMetadata({ params }) {
+  const meal = getMealBySlug(params.slug);
+
+  if (meal) {
+    return {
+      title: meal.title,
+      description: meal.summary,
+    };
+  } else {
+    notFound();
+  }
+}
+
 export default function MealPage({ params }) {
   const meal = getMealBySlug(params.slug);
 
