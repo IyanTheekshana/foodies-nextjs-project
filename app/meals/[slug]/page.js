@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import classes from "./page.module.css";
 
 export async function generateMetadata({ params }) {
-  const meal = getMealBySlug(params.slug);
+  const { slug } = await params;
+  const meal = getMealBySlug(slug);
 
   if (meal) {
     return {
